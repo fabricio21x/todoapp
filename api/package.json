@@ -4,13 +4,19 @@
   "description": "To Do list API",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
   },
-  "author": "",
+  "author": "fmonsalve",
   "license": "ISC",
   "dependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "nodemon": "^1.18.10"
   }
 }
