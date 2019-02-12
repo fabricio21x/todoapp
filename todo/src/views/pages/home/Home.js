@@ -151,6 +151,12 @@ class Home extends Component {
           onChange={ev => {
             this.setState({ newItem: ev.target.value });
           }}
+          onKeyPress={ev => {
+            var code = ev.keyCode || ev.which;
+            if (code === 13) {
+              this.addItem();
+            }
+          }}
           placeholder="Add text here..."
         />
         <InputGroupAddon addonType="append">

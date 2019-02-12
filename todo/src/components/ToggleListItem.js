@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { ListGroupItem, Row, Col, Button, Input } from "reactstrap";
-
-import http from "../utils/http";
+import { ListGroupItem, Row, Col, Input } from "reactstrap";
 
 import "./ToggleListItem.scss";
 
@@ -59,7 +57,6 @@ class ToggleListItem extends Component {
                 className="fas fa-thumbs-up checkLogo checkBtn"
               />
             )}
-
             {toggleEdit ? (
               <Input
                 className="form-control-tg"
