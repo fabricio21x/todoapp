@@ -1,0 +1,35 @@
+.main-header {
+  margin-top: 50px;
+  padding: 0 50px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  .logo-container {
+    flex-grow: 1;
+    width: 100px;
+    height: 100%;
+    background-image: url("../assets/images/full-logo.svg") no-repeat top left;
+    // background-size: 100px 50px;
+  }
+  .nav-bar {
+    flex-grow: 2;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+    display: flex;
+    list-style: none;
+    li {
+      margin-left: 40px;
+    }
+  }
+  .auth-container {
+    width: 100px;
+    flex-grow: 1;
+    text-align: center;
+    button {
+      display: inline-block;
+    }
+  }
+}

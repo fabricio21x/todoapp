@@ -1,0 +1,14 @@
+$color-primary: #2f4050;
+$color-primary-lighter: #e5e6e7;//lighten($color-primary, 5%);
+$color-primary-darker: darken($color-primary, 5%);
+
+$color-accent-lighter: #0099FF;
+$color-accent: #0071bc;
+$color-accent-darker: #246D9D;
+
+$color-warn: #f44336;
+$color-warn-lighter: lighten($color-warn,35%);
+
+$global-color: #676a6c;
+$backdrop-color: #f3f3f4;
+

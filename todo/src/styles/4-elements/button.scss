@@ -1,0 +1,14 @@
+button {
+    // min-width: 96px;
+    // height: 36px;
+    display: inline-block;
+    -webkit-appearance: none;
+    outline: none;
+    border: 0;
+    font-family: $font-primary !important;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: transparent;
+    text-align: left;
+}
