@@ -1,15 +1,11 @@
 const headerItems = [
   {
     url: "/home",
-    name: "Inicio"
+    name: "Home"
   },
   {
     url: "/about",
-    name: "Conócenos"
-  },
-  {
-    url: "/faq",
-    name: "Preguntas Frecuentes"
+    name: "About"
   }
 ];
 

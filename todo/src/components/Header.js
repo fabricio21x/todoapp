@@ -27,14 +27,6 @@ class Header extends Component {
             </li>
           ))}
         </ul>
-        <div className="auth-container">
-          <Button
-            color="primary"
-            onClick={() => this.props.history.push("/login")}
-          >
-            Ingresar
-          </Button>
-        </div>
       </div>
     );
   }

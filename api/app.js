@@ -12,7 +12,7 @@ app.get('/api/v1/list', (req, res) => {
 	});
 });
 
-const PORT = 3000;
+const PORT = 2400;
 
 app.listen(PORT, () => {
 	console.log(`Server running on port ${PORT}`);
