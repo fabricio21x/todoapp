@@ -1,11 +1,17 @@
 # ToDo App
 
-Be sure to have node, npm and mongodb installed
+Simple React app that allows you to add/remove/update elements
 
-In the `/todo` folder add the file `.env.production` with the following content:
+Inside the `/todo` folder add the file `.env.production` with the following content:
 
 ```
 NODE_ENV=production
+REACT_APP_API_URL=http://localhost:2400/api/v1/
+```
 
-REACT_APP_API_URL=http://localhost:2400/api/v1
+Inside the `/api` folder add the file `.env.production` with the following content:
+
+```
+NODE_ENV=production
+PORT=2400
 ```

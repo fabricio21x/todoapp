@@ -10,9 +10,7 @@ class Header extends Component {
     this.state = {};
   }
 
-  componentWillMount() {
-    console.log(this.props);
-  }
+  componentWillMount() {}
 
   render() {
     return (

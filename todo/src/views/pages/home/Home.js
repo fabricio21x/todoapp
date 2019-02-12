@@ -18,6 +18,8 @@ import {
   Badge
 } from "reactstrap";
 
+import ToggleListItem from "../../../components/ToggleListItem";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -31,9 +33,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      newIten: null,
+      newItem: "",
       items: []
     };
+
+    this.confirmEdit = this.confirmEdit.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   componentWillMount() {
@@ -42,9 +47,9 @@ class Home extends Component {
 
   async loadItems() {
     await http
-      .get("items")
+      .get("list")
       .then(res => {
-        this.setState({ items: res.data });
+        this.setState({ items: res.data.items });
       })
       .catch(err => console.error(err));
   }
@@ -52,60 +57,105 @@ class Home extends Component {
   addItem() {
     const { newItem } = this.state;
 
+    if (newItem.length === 0) {
+      toast.warning("Write something!!");
+      return;
+    }
+
     http
-      .post("new", {
-        data: newItem
+      .post("item", {
+        description: newItem
       })
       .then(res => {
-        toast.sucess("Item added successfully!");
+        toast.success("Item added successfully!");
+        this.setState({ newItem: "" });
+        this.loadItems();
       })
-      .catch();
+      .catch(err => {
+        toast.error("Somewthing went wrong! :( Try it again");
+        console.error(err);
+      });
+  }
+
+  confirmEdit(item) {
+    http
+      .put(`item/${item.id}`, {
+        description: item.description,
+        status: item.status
+      })
+      .then(res => {
+        this.loadItems();
+        toast.success("Item updated successfuly");
+      })
+      .catch(err => {
+        toast.error("Something went wrong! Try again please.");
+        console.error(err);
+      });
+  }
+
+  deleteItem(item) {
+    http
+      .delete(`item/${item.id}`)
+      .then(res => {
+        this.loadItems();
+        toast.success("Item deleted successfuly");
+      })
+      .catch(err => {
+        toast.error("Something went wrong! Try again please.");
+        console.error(err);
+      });
   }
 
   renderItemsList() {
+    const { items } = this.state;
     return (
-      <ListGroup>
-        <ListGroupItem tag="button" action>
-          {/* <InputGroup>
-            <InputGroupAddon addonType="prepend">
-              <InputGroupText>
-                <Input
-                  addon
-                  type="checkbox"
-                  aria-label="Checkbox for following text input"
-                />
-              </InputGroupText>
-            </InputGroupAddon>
-            <Input />
-          </InputGroup> */}
-        </ListGroupItem>
+      <ListGroup flush>
+        {items.map((item, key) => (
+          <ToggleListItem
+            key={key}
+            item={item}
+            deleteItem={this.deleteItem}
+            confirmEdit={this.confirmEdit}
+          />
+        ))}
       </ListGroup>
     );
   }
 
   renderItemsCard() {
     return (
-      <Card>
-        <CardHeader>
-          <strong>List</strong>
-        </CardHeader>
-        <CardBody>{this.renderItemsList()}</CardBody>
+      <Card outline color="info">
+        <CardBody>
+          <CardTitle>
+            <strong>List</strong>
+          </CardTitle>
+          {this.renderItemsList()}
+        </CardBody>
       </Card>
     );
   }
 
   renderNewItemForm() {
+    const { newItem } = this.state;
+
     return (
       <InputGroup>
         <InputGroupAddon addonType="prepend">
           <InputGroupText>
-            <i class="fas fa-hand-point-right" />
+            <i className="fas fa-hand-point-right" />
           </InputGroupText>
         </InputGroupAddon>
-        <Input type="text" placeholder="Add text here..." />
+        <Input
+          type="text"
+          value={newItem}
+          onChange={ev => {
+            this.setState({ newItem: ev.target.value });
+          }}
+          placeholder="Add text here..."
+        />
         <InputGroupAddon addonType="append">
-          <Button color="success">
-            <i class="fas fa-plus" />
+          <Button color="success" onClick={() => this.addItem()}>
+            <i className="fas fa-plus" />
           </Button>
         </InputGroupAddon>
       </InputGroup>
@@ -139,8 +189,12 @@ class Home extends Component {
             <h1>Things to do...</h1>
           </Row>
           <Row>
-            <Col sm="6">{this.renderNewItemCard()}</Col>
-            <Col sm="6">{this.renderItemsCard()}</Col>
+            <Col lg="6" sm="12">
+              {this.renderNewItemCard()}
+            </Col>
+            <Col lg="6" sm="12">
+              {this.renderItemsCard()}
+            </Col>
           </Row>
         </Container>
       </div>
